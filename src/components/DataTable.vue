@@ -34,6 +34,7 @@ export default {
   width: 100%
 
   &__table
+    width: 100%
     border-collapse: collapse
 
   &__header
