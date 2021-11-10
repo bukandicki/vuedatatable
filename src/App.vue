@@ -1,7 +1,7 @@
 <template lang="pug">
 main#app
-  Input(placeholder="Search", v-model="searchQuery")
-    span(slot="icon-prepend") a
+  Input.search-box(placeholder="Search", v-model="searchQuery")
+    img(role="button", slot="append", :src="searchIcon")
   DataTable(:headers="headers", :items="computeMocks")
     template(v-slot:[`created_at`]="{ item }")
       | {{ new Date(item.created_at).toLocaleString() }}
@@ -11,11 +11,13 @@ main#app
 
     template(v-slot:[`input`]="{ item }")
       Input(:value="item.units", type="number", min="1")
+        span(slot="prepend") Qty
 </template>
 
 <script>
-import DataTable from "./components/DataTable";
-import Input from "./components/Input";
+import DataTable from "@/components/DataTable";
+import Input from "@/components/Input";
+import searchIcon from "@/assets/search.svg";
 import mockData from "@/mock";
 
 export default {
@@ -25,6 +27,7 @@ export default {
 
   data: () => ({
     mockData,
+    searchIcon,
 
     searchQuery: "",
 
@@ -75,12 +78,14 @@ export default {
 };
 </script>
 
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="sass">
+#app
+  font-family: "Avenir", Helvetica, Arial, sans-serif
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  color: #2c3e50
+  margin-top: 60px
+
+.search-box
+  margin-bottom: 20px
 </style>

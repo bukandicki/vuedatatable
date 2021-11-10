@@ -1,13 +1,13 @@
 <template lang="pug">
 .input
   .input__wrapper
-    .input__icon.input__icon--prepend(v-if="$slots['icon-prepend']")
-      slot(name="icon-prepend")
+    .input--prepend(v-if="$slots['prepend']")
+      slot(name="prepend")
 
     input.input__field(v-bind="$attrs", v-on="listeners")
 
-    .input__icon.input__icon--append(v-if="$slots['icon-append']")
-      slot(name="icon-append")
+    .input--append(v-if="$slots['append']")
+      slot(name="append")
 </template>
 
 <script>
@@ -42,4 +42,17 @@ export default {
 
     &:focus
       outline: none
+
+  &--append,
+  &--prepend
+    padding: .4rem .8rem
+    border: solid 1px #c3c3c3
+  
+
+  &--append
+    border-left: unset
+    
+  &--prepend
+    border-right: unset
+    background: #f2f2f2
 </style>
